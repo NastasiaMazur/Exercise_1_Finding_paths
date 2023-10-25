@@ -113,7 +113,7 @@ def is_traversable(lab: list[str], location: tuple[int, int]) -> bool:
         return True
     return False
 
-def bfs(lab, start, end):
+def bfs(lab: list[str], start: tuple[int, int], end: tuple[int, int]) -> list[tuple[int, int]]:
     queue = deque()
     queue.append([start])  # Start with a path containing only the start location
     visited = set()
@@ -225,3 +225,9 @@ print_labyrinth(labyrinth)
 # TO DO:
 # 1 Create restrictions for users input (if it makes sense)
 # Try new labyrinth
+
+"""
+Strange behaviour:
+It shows the path from (5, 1) to (1, 1)
+but says "No path found" from (1, 1) to (5, 1) 
+"""
