@@ -176,3 +176,6 @@ labyrinth = [
 #print(labyrinth)
 print_labyrinth(labyrinth)
 """
+
+# TO DO:
+# 1 Create restrictions for users input (if it makes sense)
