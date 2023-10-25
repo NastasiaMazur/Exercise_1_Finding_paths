@@ -89,15 +89,25 @@ def prompt_integer(message: str) -> int:
 #start = prompt_user_for_location("start")
 
 #2.2
-def prompt_user_for_location(name: str) -> tuple[int, int]:
- #print(f"Enter the {name} location:")
- row = prompt_integer(f"Row of {name}: ")
- column = prompt_integer(f"Column of {name}: ")
- return (row, column)
+
+def is_traversable(lab: list[str], location: tuple[int, int]) -> bool:
+    row, col = location
+    if 0 <= row < len(lab) and 0 <= col < len(lab[0]) and lab[row][col] == ' ':
+        return True
+    return False
+def prompt_user_for_location(name: str, lab: list[str]) -> tuple[int, int]:
+    while True:
+        row = prompt_integer(f"Row of {name}: ")
+        column = prompt_integer(f"Column of {name}: ")
+        location = (row, column)
+        if is_traversable(lab, location):
+            return location
+        else:
+            print("Invalid input. Please choose a valid location that is not '█'.")
 
 
-start = prompt_user_for_location("start")
-end = prompt_user_for_location("end")
+start = prompt_user_for_location("start",labyrinth)
+end = prompt_user_for_location("end", labyrinth)
 
 print("Start location:", start)
 print("End location:", end)
@@ -107,11 +117,7 @@ print("End location:", end)
 
 from collections import deque
 
-def is_traversable(lab: list[str], location: tuple[int, int]) -> bool:
-    row, col = location
-    if 0 <= row < len(lab) and 0 <= col < len(lab[0]) and lab[row][col] == ' ':
-        return True
-    return False
+
 
 def bfs(lab: list[str], start: tuple[int, int], end: tuple[int, int]) -> list[tuple[int, int]]:
     queue = deque()
@@ -230,4 +236,7 @@ print_labyrinth(labyrinth)
 Strange behaviour:
 It shows the path from (5, 1) to (1, 1)
 but says "No path found" from (1, 1) to (5, 1) 
+Reason:
+program allows the user to choose a cell with '█' when inputting the start and end locations. 
+
 """
