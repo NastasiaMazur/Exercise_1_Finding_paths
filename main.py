@@ -65,6 +65,51 @@ print("End location:", end)
 # Phase 3
 
 from collections import deque
+
+def is_traversable(lab, location):
+ row, col = location
+ if 0 <= row < len(lab) and 0 <= col < len(lab[0]) and lab[row][col] != '█':
+  return True
+ return False
+
+def bfs(lab, start, end):
+    queue = deque()
+    queue.append([start])  # Start with a path containing only the start location
+    visited = set()
+
+    # Define the possible moves (up, down, left, right)
+    moves = [(0, 1), (0, -1), (1, 0), (-1, 0)]
+
+    while queue:
+        path = queue.popleft()  # Dequeue the first path
+        last = path[-1]  # Get the last location in the path
+
+        if last == end:
+            return path  # If we reached the end location, return the path
+
+        if last not in visited:
+            visited.add(last)
+
+            for move in moves:
+                next_location = (last[0] + move[0], last[1] + move[1])
+
+                if is_traversable(lab, next_location):
+                    new_path = path.copy()
+                    new_path.append(next_location)
+                    queue.append(new_path)
+
+    return []  # If no path is found, return an empty list
+
+path = bfs(labyrinth, start, end)
+if path:
+ print("Path from start to end:")
+ for location in path:
+  print(location)
+else:
+ print("No path found.")
+
+
+"""
 def bfs(lab: list[str], start: tuple[int, int], end: tuple[int, int]) -> list[tuple[int, int]]:
  # Define the possible moves: up, down, left, right
  moves = [(1, 0), (-1, 0), (0, 1), (0, -1)]
@@ -114,7 +159,7 @@ if path:
   print(location)
 else:
  print("No path found.")
-
+"""
 
 
 """
