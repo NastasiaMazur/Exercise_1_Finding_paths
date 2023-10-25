@@ -46,7 +46,7 @@ def print_labyrinth(lab: list[str], path: list[tuple[int, int]] = None):
 
 def replace_at_index(s, r, idx):
     return s[:idx] + r + s[idx + len(r):]
-"""
+
 labyrinth = [
  "███████",
  "█     █",
@@ -55,8 +55,8 @@ labyrinth = [
  "█     █",
  "███████",
 ]
-"""
 
+"""
 labyrinth = [
  "████████",
  "█      █",
@@ -65,7 +65,7 @@ labyrinth = [
  "█  █   █",
  "████████",
 ]
-
+"""
 print_labyrinth(labyrinth)
 
 
@@ -103,7 +103,7 @@ def prompt_user_for_location(name: str, lab: list[str]) -> tuple[int, int]:
         if is_traversable(lab, location):
             return location
         else:
-            print("Invalid input. Please choose a valid location that is not '█'.")
+            print("Invalid input. Please choose a valid location within the labyrinth's boundaries and not '█'.")
 
 
 start = prompt_user_for_location("start",labyrinth)
