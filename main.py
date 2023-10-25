@@ -2,6 +2,7 @@
 
 # Phase 1:
 """
+# First version for Phase 1
 def print_labyrinth(lab: list[str]):
  rows = len(lab)
  columns = len(lab[0])
@@ -18,8 +19,9 @@ def print_labyrinth(lab: list[str]):
  bottom_row = " " + "".join([str(i % 10) for i in range(columns)]) + " "
  print(bottom_row)
 """
-def replace_at_index(s, r, idx):
-    return s[:idx] + r + s[idx + len(r):]
+
+# Adapted version for Phase 3
+
 def print_labyrinth(lab: list[str], path: list[tuple[int, int]] = None):
     rows = len(lab)
     columns = len(lab[0])
@@ -42,8 +44,9 @@ def print_labyrinth(lab: list[str], path: list[tuple[int, int]] = None):
     bottom_row = " " + "".join([str(i % 10) for i in range(columns)]) + " "
     print(bottom_row)
 
-
-
+def replace_at_index(s, r, idx):
+    return s[:idx] + r + s[idx + len(r):]
+"""
 labyrinth = [
  "███████",
  "█     █",
@@ -52,8 +55,19 @@ labyrinth = [
  "█     █",
  "███████",
 ]
+"""
+
+labyrinth = [
+ "████████",
+ "█      █",
+ "█   ██ █",
+ "█ █ ██ █",
+ "█  █   █",
+ "████████",
+]
 
 print_labyrinth(labyrinth)
+
 
 # Phase 2:
 
@@ -76,7 +90,7 @@ def prompt_integer(message: str) -> int:
 
 #2.2
 def prompt_user_for_location(name: str) -> tuple[int, int]:
- print(f"Enter the {name} location:")
+ #print(f"Enter the {name} location:")
  row = prompt_integer(f"Row of {name}: ")
  column = prompt_integer(f"Column of {name}: ")
  return (row, column)
@@ -135,13 +149,7 @@ if path:
 else:
  print("No path found.")
 
-
-
 # last
-print_labyrinth(labyrinth, path)
-start_location = prompt_user_for_location("start")
-end_location = prompt_user_for_location("end")
-path = bfs(labyrinth, start_location, end_location)
 print_labyrinth(labyrinth, path)  # Display the labyrinth with the path
 
 
@@ -216,3 +224,4 @@ print_labyrinth(labyrinth)
 
 # TO DO:
 # 1 Create restrictions for users input (if it makes sense)
+# Try new labyrinth
