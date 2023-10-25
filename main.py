@@ -1,6 +1,7 @@
 
 
 # Phase 1:
+"""
 def print_labyrinth(lab: list[str]):
  rows = len(lab)
  columns = len(lab[0])
@@ -16,6 +17,32 @@ def print_labyrinth(lab: list[str]):
  # Prints the bottom row with column numbers
  bottom_row = " " + "".join([str(i % 10) for i in range(columns)]) + " "
  print(bottom_row)
+"""
+def replace_at_index(s, r, idx):
+    return s[:idx] + r + s[idx + len(r):]
+def print_labyrinth(lab: list[str], path: list[tuple[int, int]] = None):
+    rows = len(lab)
+    columns = len(lab[0])
+
+    # Prints the top row with column numbers
+    top_row = " " + "".join([str(i % 10) for i in range(columns)]) + " "
+    print(top_row)
+
+    for i in range(rows):
+        row = str(i)
+        for j in range(columns):
+            if path is not None and (i, j) in path:
+                row += "X"  # Replace spaces on the path with "X"
+            else:
+                row += lab[i][j]
+        row += str(i)
+        print(row)
+
+    # Prints the bottom row with column numbers
+    bottom_row = " " + "".join([str(i % 10) for i in range(columns)]) + " "
+    print(bottom_row)
+
+
 
 labyrinth = [
  "███████",
@@ -66,11 +93,11 @@ print("End location:", end)
 
 from collections import deque
 
-def is_traversable(lab, location):
- row, col = location
- if 0 <= row < len(lab) and 0 <= col < len(lab[0]) and lab[row][col] != '█':
-  return True
- return False
+def is_traversable(lab: list[str], location: tuple[int, int]) -> bool:
+    row, col = location
+    if 0 <= row < len(lab) and 0 <= col < len(lab[0]) and lab[row][col] == ' ':
+        return True
+    return False
 
 def bfs(lab, start, end):
     queue = deque()
@@ -107,6 +134,16 @@ if path:
   print(location)
 else:
  print("No path found.")
+
+
+
+# last
+print_labyrinth(labyrinth, path)
+start_location = prompt_user_for_location("start")
+end_location = prompt_user_for_location("end")
+path = bfs(labyrinth, start_location, end_location)
+print_labyrinth(labyrinth, path)  # Display the labyrinth with the path
+
 
 
 """
